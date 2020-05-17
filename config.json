@@ -1,0 +1,24 @@
+{
+    "development":{
+        "WS_URL": "<WS Connection URL>",
+        "chargePointID": "<Charge Point ID>",
+        "chargePointProfile":
+        {
+            "chargePointVendor": "",
+            "chargePointModel": "",
+            "chargePointSerialNumber": "",
+            "chargeBoxSerialNumber": "",
+            "firmwareVersion": "",
+            "iccid": "",
+            "imsi": "",
+            "meterSerialNumber":"",
+            "meterType": ""
+        }
+    },
+    "production":{
+
+    },
+    "testing":{
+        
+    }
+}
