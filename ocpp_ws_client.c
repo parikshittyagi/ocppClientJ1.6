@@ -44,7 +44,7 @@ char *errors[] = {
 
 /**
  *   @brief   --> this function is the entry point for intiating websocket connection to server 
- *   @params  --> const char *URI : This is the URL of Websocket server where connection is to be initiated
+ *   @param  --> const char *URI : This is the URL of Websocket server where connection is to be initiated
 */
 
 wsclient *libwsclient_new(const char *URI)
@@ -94,7 +94,7 @@ wsclient *libwsclient_new(const char *URI)
 
 /**
  *   @brief   -->  This function intiates the websocket connection with the server, it follows the process that is mentioned in rfc6455
- *   @params  -->  void *ptr : This is the pointer which points towards URI, that is passed while calling it
+ *   @param  -->  void *ptr : This is the pointer which points towards URI, that is passed while calling it
 */
 
 void *libwsclient_handshake_thread(void *ptr)
@@ -371,7 +371,7 @@ void *libwsclient_handshake_thread(void *ptr)
 
 /**
  *   @brief   --> This function opens the connection between client and server 
- *   @params  --> const char *host : socket host which will be parsed from URI passed in the beginning
+ *   @param  --> const char *host : socket host which will be parsed from URI passed in the beginning
  *                const char *port : port address for socket connection  
 */
 
@@ -412,7 +412,7 @@ int libwsclient_open_connection(const char *host, const char *port)
 
 /**
  *   @brief   -->  function sets errorCode with error when ever any error occurs
- *   @params  -->  int errcode : error code to be passed
+ *   @param  -->  int errcode : error code to be passed
 */
 
 wsclient_error *libwsclient_new_error(int errcode)
@@ -494,7 +494,7 @@ wsclient_error *libwsclient_new_error(int errcode)
 
 /**
  *   @brief   -->  To send data from client to server
- *   @params  -->  wsclient *client : websocket client struct
+ *   @param  -->  wsclient *client : websocket client struct
  *                 char *strdata    : data that is to be send to server of char * datatype
 */  
 
@@ -621,7 +621,7 @@ int libwsclient_send(wsclient *client, char *strdata)  {
 
 /**
  *   @brief   -->  This function maintains running of websocket thread
- *   @params  -->  wsclient *c : Websocket client from stuct 
+ *   @param  -->  wsclient *c : Websocket client from stuct 
 */
 
 void libwsclient_run(wsclient *c)
@@ -644,7 +644,7 @@ void libwsclient_run(wsclient *c)
 
 /**
  *   @brief   -->  This function is called when libwsclient_run is called
- *   @params  -->  void *ptr : It is used for pointing towards websocket client
+ *   @param  -->  void *ptr : It is used for pointing towards websocket client
 */
 
 void *libwsclient_run_thread(void *ptr)
@@ -686,7 +686,7 @@ void *libwsclient_run_thread(void *ptr)
 
 /**
  *   @brief   -->  If any data comes from Websocket it is handled here
- *   @params  -->  wsclient *c : Websocket client
+ *   @param  -->  wsclient *c : Websocket client
  *                 char in : Char type data coming in
 */
 
@@ -736,7 +736,7 @@ inline void libwsclient_in_data(wsclient *c, char in){
 
 /**
  *   @brief   -->  this function forms the complete frame for websocket
- *   @params  -->  wsclient *c           : websocket client
+ *   @param  -->  wsclient *c           : websocket client
  *                 wsclient_frame *frame : websocket client frame 
 */
 
@@ -799,7 +799,7 @@ int libwsclient_complete_frame(wsclient *c, wsclient_frame *frame){
 
 /**
  *   @brief   -->  This function controls the complete frame of websocket client
- *   @params  -->  wsclient *c               : websocket client
+ *   @param  -->  wsclient *c               : websocket client
  *                 wsclient_frame *ctl_frame : websocket control frame
 */
 
@@ -859,7 +859,7 @@ void libwsclient_handle_control_frame(wsclient *c, wsclient_frame *ctl_frame) {
 
 /**
  *   @brief   -->  This function dispatches the message from client to server
- *   @params  -->  wsclient *c             : websocket client
+ *   @param  -->  wsclient *c             : websocket client
  *                 wsclient_frame *current : current frame for ws_client
 */
 
@@ -912,7 +912,7 @@ void libwsclient_dispatch_message(wsclient *c, wsclient_frame *current) {
 
 /**
  *   @brief   -->  once the connection is closed, this function cleans up the frames
- *   @params  -->  wsclient_frame _first : ws_client_frame which was used for the first time
+ *   @param  -->  wsclient_frame _first : ws_client_frame which was used for the first time
 */
 
 void libwsclient_cleanup_frames(wsclient_frame *first) {
@@ -931,7 +931,7 @@ void libwsclient_cleanup_frames(wsclient_frame *first) {
 
 /**
  *   @brief   -->  sends the data to socket
- *   @params  -->  wsclient *c     : websocket client
+ *   @param  -->  wsclient *c     : websocket client
  *                 const void *buf : buffer size to be sent
  *                 size_t length   : length of the buffer size
 */
@@ -944,7 +944,7 @@ ssize_t _libwsclient_write(wsclient *c, const void *buf, size_t length)
 
 /**
  *   @brief   -->  this reads the message received from socket
- *   @params  -->  wsclient *c   : websocket client
+ *   @param  -->  wsclient *c   : websocket client
  *                 void *buf     : buffer to be used for storing data of no datatype
  *                 size_t length : length of the buffer of message sent
 */
@@ -957,7 +957,7 @@ ssize_t _libwsclient_read(wsclient *c, void *buf, size_t length)
 
 /**
  *   @brief   -->  this function kills the thread running
- *   @params  -->  wsclient *client : websocket client 
+ *   @param  -->  wsclient *client : websocket client 
 */
 
 void libwsclient_finish(wsclient *client){
@@ -972,7 +972,7 @@ void libwsclient_finish(wsclient *client){
 
 /**
  *   @brief   -->  this function opens the locked thread
- *   @params  -->  wsclient *client        :  websocket client
+ *   @param  -->  wsclient *client        :  websocket client
  *                 int (*cb)(wsclient *c)  :  websocket call back function
 */
 
@@ -986,7 +986,7 @@ void libwsclient_onclose(wsclient *client, int (*cb)(wsclient *c))
 
 /**
  *   @brief   -->  
- *   @params  -->
+ *   @param  -->
 */
 
 void libwsclient_onopen(wsclient *client, int (*cb)(wsclient *c))
@@ -999,7 +999,7 @@ void libwsclient_onopen(wsclient *client, int (*cb)(wsclient *c))
 
 /**
  *   @brief   -->  
- *   @params  -->
+ *   @param  -->
 */
 
 void libwsclient_onmessage(wsclient *client, int (*cb)(wsclient *c, wsclient_message *msg))
@@ -1012,7 +1012,7 @@ void libwsclient_onmessage(wsclient *client, int (*cb)(wsclient *c, wsclient_mes
 
 /**
  *   @brief   -->  
- *   @params  -->
+ *   @param  -->
 */
 
 void libwsclient_onerror(wsclient *client, int (*cb)(wsclient *c, wsclient_error *err))

@@ -97,7 +97,7 @@ int onmessage(wsclient *c, wsclient_message *msg)
                         if(!strcmp(cJSON_GetObjectItem(ocppReceiveFrame->jsonPacket, "status")->valuestring,"Accepted"))   //If CP is accepted in the network
                         {
                             fprintf(stderr, "Charging station accepted by CMS\n");
-                            //This functions gets the time from CMS in response and then change the time of EC25 for time synchronization
+                            //This functions gets the time from CMS in response and then change the time of client for time synchronization
                             if(0 != changeTimeOfMachine(cJSON_GetObjectItem(ocppReceiveFrame->jsonPacket, "currentTime")->valuestring)) 
                             {
                                 fprintf(stderr, "Failed to change the time of the system\n");

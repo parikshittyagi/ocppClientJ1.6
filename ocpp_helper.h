@@ -9,7 +9,6 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <time.h>
-#include"/home/baba/workDirectory/cuePen/quectel/codes/include/ql_time.h"           //This is EC25 specific library, please change the path according to the system
 #include "ocpp_ws_client.h"
 #include "cJSON.h"
 
