@@ -1,4 +1,4 @@
-## Code structure**
+## Code structure
 
 **main.c**  -->  Entry point of the code, it initiates the OCPP1.6 Process
 
