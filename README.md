@@ -1,45 +1,43 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+**Code structure**
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+main.c               entry point of the code, it initiates the OCPP1.6 Process
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+ocpp_process.c/.h    This library handles the events occurring w.r.t to OCPP, the machine states can be found
+here. Moreover this library start Websockets connection with the CMS URL mentioned in config.json
 
----
+ocpp_helper.c/.h     This library is a helper library for OCPP1.6 Process, it has functions which helps in achieving OCPP client functionalities.For generating UUID the reference is taken from [here](https://github.com/karelzak/util-linux/tree/master/libuuid)
 
-## Edit a file
+ocpp_ws_client.c/.h  This library is responsible for connecting OCPP client to CMS with the help of WebSockets. It has 
+process of handshaking according to OCPPJ1.6 and once accepted it has events which helps in knowing the nature of communication over Transport Layer.The main refrence of this library can be found [here](https://github.com/payden/libwsclient)
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+utils.c/.h           This library is the helper library of ocpp_ws_client.
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+cJSON.c/.h           This library is taken from [here](https://github.com/DaveGamble/cJSON). Since OCPP1.6J is mostly based on JSON packets over sockets, hence heavy use of this library is done in complete client. This library is written in C and does not require any other dependecy and can be easily ported.
 
----
-
-## Create a file
-
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+config.json          This is configuration file, all the OCPP1.6J configuration to be set here in JSON format
+compile.sh           This compiles the complete source code and generate executable with name of "main"
 
 ---
 
-## Clone a repository
+## Setting up connection
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+This code is tested with Steve server for OCPPJ1.6. The steve server code can be found [here](https://github.com/RWTH-i5-IDSG/steve).To start connection with your respective server below mentioned are the steps to be followed.
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+1. In config.json file, put the WS URL of server in **WS_URL** field.
+2. Put the client ID in **chargePointID** field.
+3. The **chargePointProfile** is used in boot notification message from client side for providing charger information to the server.
+4. If the dev platform supports gcc, then simply run **compile.sh** file and you will get an executable with name of **test**
+6. Use this executable to run and connect with ocpp complaint CMS server
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+---
+
+## How to take up further development
+
+Currently this client only supports bootNotification message and it's response, since OCPP is completely functionality dependent, it's better to use your own use cases for further developement, but there are already functions that can be used to create OCPP message or parse occpp messages.
+
+1. Use **parseOCPPFrame** function to parse any message from CMS and it will return a structure of **ocpp_frame** type from which further JSON packet can be retrieved.
+2. To form any OCPP frame, use **formOCPPFrame** function and to send it to server use **sendFrameToCMS** function.
+
+---
+
+If further support is required, you can write me at parikshit04tyagi@gmail.com. Also if this source codes helps you in some way, don't forget to award a star to this repo. Happy Coding !!
